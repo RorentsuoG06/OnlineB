@@ -24,9 +24,9 @@ namespace OnlineBankingDataService
 
             if (existing.Count == 0)
             {
-                BankAccount acc1 = new BankAccount { AccountNumber = 0000, Pincode = 1111, balance = 0 };
-                BankAccount acc2 = new BankAccount { AccountNumber = 1001, Pincode = 1111, balance = 0 };
-                BankAccount acc3 = new BankAccount { AccountNumber = 1002, Pincode = 2222, balance = 0 };
+                BankAccount acc1 = new BankAccount { AccountNumber = 1000, Pincode = 1111, balance = 0, Transactions = new List<string>() };
+                BankAccount acc2 = new BankAccount { AccountNumber = 1001, Pincode = 1111, balance = 0, Transactions = new List<string>() };
+                BankAccount acc3 = new BankAccount { AccountNumber = 1002, Pincode = 2222, balance = 0, Transactions = new List<string>() };
 
                 Add(acc1);
                 Add(acc2);
@@ -100,7 +100,7 @@ namespace OnlineBankingDataService
                     Pincode = int.Parse(reader["Pincode"].ToString()),
                     balance = double.Parse(reader["Balance"].ToString()),
                     Transactions = string.IsNullOrEmpty(reader["Transactions"].ToString())
-                    ? new List<string>() : reader["Transactions"].ToString().Split(';').ToList()
+                    ? new List<string>() : reader["Transactions"].ToString().Split('|').ToList()
                 };
             }
 
@@ -135,7 +135,7 @@ namespace OnlineBankingDataService
             cmd.Parameters.AddWithValue("@AccountNumber", account.AccountNumber);
             cmd.Parameters.AddWithValue("@Pincode", account.Pincode);
             cmd.Parameters.AddWithValue("@Balance", account.balance);
-            cmd.Parameters.AddWithValue("@Transactions", string.Join(";", account.Transactions));
+            cmd.Parameters.AddWithValue("@Transactions", string.Join("|", account.Transactions));
 
             sqlConnection.Open();
             cmd.ExecuteNonQuery();

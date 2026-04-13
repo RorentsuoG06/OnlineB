@@ -8,7 +8,7 @@ namespace OnlineBankingAppService
 {
     public class OnlineBankAppService
     {
-        BankingDataService dataService = new BankingDataService(new OnlineBankingInMemoryData());
+        BankingDataService dataService = new BankingDataService(new OnlineBankingDBData());
 
         public BankAccount GetAccNum(int accountNumber)
         {

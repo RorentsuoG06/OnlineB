@@ -1,17 +1,26 @@
 [
   {
-    "AccountNumber": 0,
+    "AccountNumber": 1000,
     "Pincode": 1111,
-    "balance": 9970
+    "balance": 0,
+    "Transactions": []
   },
   {
     "AccountNumber": 1001,
     "Pincode": 1111,
-    "balance": 9365
+    "balance": 165,
+    "Transactions": [
+      "DEPOSIT PHP 500 via BPI",
+      "SEND MONEY PHP 200 TO ACCOUNT 1002",
+      "WITHDRAW PHP 100 via BPI"
+    ]
   },
   {
     "AccountNumber": 1002,
     "Pincode": 2222,
-    "balance": 0
+    "balance": 200,
+    "Transactions": [
+      "RECEIVED PHP 200 FROM ACCOUNT 1001"
+    ]
   }
 ]
