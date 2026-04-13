@@ -1,0 +1,17 @@
+[
+  {
+    "AccountNumber": 0,
+    "Pincode": 1111,
+    "balance": 9970
+  },
+  {
+    "AccountNumber": 1001,
+    "Pincode": 1111,
+    "balance": 9365
+  },
+  {
+    "AccountNumber": 1002,
+    "Pincode": 2222,
+    "balance": 0
+  }
+]
