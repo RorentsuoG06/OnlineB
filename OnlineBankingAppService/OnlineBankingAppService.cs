@@ -46,6 +46,7 @@ namespace OnlineBankingAppService
 
         public (bool success, double fee, double newBalance) Deposit(int accountNumber, string SectionInput, string BankInput, double amount) // CASH-IN
         {
+            //Account Validation (See if Account actually exsits before doing anything)
             var account = dataService.GetAccNum(accountNumber);
             if (account == null || amount <= 0)
             {

@@ -45,7 +45,7 @@ namespace OnlineBankingDataService
             insertCommand.Parameters.AddWithValue("@AccountNumber", account.AccountNumber);
             insertCommand.Parameters.AddWithValue("@Pincode", account.Pincode);
             insertCommand.Parameters.AddWithValue("@Balance", account.balance);
-            insertCommand.Parameters.AddWithValue("@Transactions", string.Join(";", account.Transactions));
+            insertCommand.Parameters.AddWithValue("@Transactions", string.Join("|", account.Transactions));
 
             sqlConnection.Open();
             insertCommand.ExecuteNonQuery();
@@ -71,7 +71,7 @@ namespace OnlineBankingDataService
                     balance = double.Parse(reader["Balance"].ToString()),
                     Transactions = reader["Transactions"] == DBNull.Value 
                     ? new List<string>()
-                    : reader["Transactions"].ToString().Split(';').ToList()
+                    : reader["Transactions"].ToString().Split('|').ToList()
                 };
 
                 accounts.Add(acc);

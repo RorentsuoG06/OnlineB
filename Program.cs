@@ -49,7 +49,7 @@ namespace OnlineBanking_Act1
                         return;
                     default:
                         Console.WriteLine("INVALID OPTION. PLEASE TRY AGAIN.");
-                        return;
+                        continue;
                 }
             }
         }
@@ -80,8 +80,24 @@ namespace OnlineBanking_Act1
 
                 if (age < 18)
                 {
-                    Console.Write("SORRY, YOU MUST BE AT LEAST 18 YEARS OLD TO CREATE AN ACCOUNT.");
-                    return;
+                    Console.WriteLine("SORRY, YOU MUST BE AT LEAST 18 YEARS OLD TO CREATE AN ACCOUNT.");
+                    Console.WriteLine("-------------------------");
+                    Console.WriteLine("REGISTRATION FAILED");
+                    Console.Write("DO YOU WANT TO REGISTER AGAIN? [Y|N]: ");
+                    string retry = Console.ReadLine().ToUpper();
+
+                    if (retry != "Y")
+                    {
+                        success = true;
+                        Console.Write("-------------------------\n");
+                        Console.WriteLine("RETURNING TO THE MAIN MENU...");
+                        MainMenu();
+                        return;
+                    }
+                    else if (retry == "Y")
+                    {
+                        continue;
+                    }
                 }
 
                 // Enter 4 Digit Pin
@@ -129,22 +145,6 @@ namespace OnlineBanking_Act1
                     return;
                 }
 
-                //If newAccount == null
-                Console.WriteLine("-------------------------");
-                Console.Write("REGISTRATION FAILED");
-                Console.Write("DO YOU WANT TO REGISTER AGAIN? [Y|N]: ");
-                string retry = Console.ReadLine().ToUpper();
-
-                if (retry != "Y")
-                {
-                    success = true;
-                    Console.Write("-------------------------\n");
-                    Console.WriteLine("RETURNING TO THE MAIN MENU...");
-                    MainMenu();
-                    return;
-                }
-
-
             } while (!success);
 
         }
@@ -158,12 +158,14 @@ namespace OnlineBanking_Act1
                 Console.Write("ENTER ACCOUNT NUMBER: ");
                 int UserAccountNum;
 
+                //Input Validation
                 if(!int.TryParse(Console.ReadLine(), out UserAccountNum))
                 {
                     Console.WriteLine("YOU MAY HAVE TYPED YOUR ACCOUNT NUMBER WRONG. PLEASE TRY AGAIN.");
                     continue;
                 }
 
+                //Account Validation
                 var acc = appService.GetAccNum(UserAccountNum);
 
                 if(acc == null)
@@ -209,7 +211,7 @@ namespace OnlineBanking_Act1
                 }
                 else if (continueInput.ToUpper() == "N")
                 {
-                    Console.WriteLine(appService.PrintReceipt(UserAccountNum));
+                    Console.WriteLine("RETURNING TO MAIN MENU...");
                     Environment.Exit(0);
                 }
                 else
